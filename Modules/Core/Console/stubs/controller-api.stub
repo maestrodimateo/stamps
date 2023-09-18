@@ -1,0 +1,107 @@
+<?php
+
+namespace $CLASS_NAMESPACE$;
+
+use $MODEL_NAMESPACE$\$MODEL_NAME$;
+use $SERVICE_NAMESPACE$\$MODEL_NAME$Service;
+use $REQUEST_NAMESPACE$\$MODEL_NAME$Request;
+use $RESOURCE_NAMESPACE$\$MODEL_NAME$Resource;
+
+use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
+use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+use Illuminate\Http\JsonResponse;
+use App\Http\Controllers\Controller;
+
+class $CLASS$ extends Controller
+{
+
+    public function __construct(protected $MODEL_NAME$Service $$MODEL_LOWER_NAME$Service)
+    {}
+
+    /**
+     * Get all the $MODEL_LOWER_NAME$s
+     *
+     * @queryParam search string allow the research
+     * @queryParam paginate integer add pagination possibility
+     *
+     * @return AnonymousResourceCollection
+     */
+    public function index(): AnonymousResourceCollection
+    {
+        $this->authorize('list', $MODEL_NAME$::class);
+
+        $$MODEL_LOWER_NAME$s = $this->$MODEL_LOWER_NAME$Service->fulltextSearch()->get();
+
+        return $MODEL_NAME$Resource::collection($$MODEL_LOWER_NAME$s);
+    }
+
+    /**
+     * Show a specific $MODEL_LOWER_NAME$
+     *
+     * @param $MODEL_NAME$ $$MODEL_LOWER_NAME$
+     *
+     * @return $MODEL_NAME$Resource
+     */
+    public function show($MODEL_NAME$ $$MODEL_LOWER_NAME$): $MODEL_NAME$Resource
+    {
+        $this->authorize('read', $$MODEL_LOWER_NAME$);
+
+        return $MODEL_NAME$Resource::make($$MODEL_LOWER_NAME$);
+    }
+
+    /**
+     * Create a $MODEL_LOWER_NAME$
+     *
+     * @bodyParam example string required
+     *
+     * @param $MODEL_NAME$Request $request
+     *
+     * @return JsonResponse
+     */
+    public function store($MODEL_NAME$Request $request): JsonResponse
+    {
+        $this->authorize('create', $MODEL_NAME$::class);
+
+        $$MODEL_LOWER_NAME$Created = $this->$MODEL_LOWER_NAME$Service->create();
+
+        return response()->json([
+            '$MODEL_LOWER_NAME$' => $MODEL_NAME$Resource::make($$MODEL_LOWER_NAME$Created)
+        ], Response::HTTP_CREATED);
+    }
+
+    /**
+     * Update a specific $MODEL_LOWER_NAME$
+     *
+     * @bodyParam example string required
+     *
+     * @param $MODEL_NAME$Request $request
+     * @param $MODEL_NAME$ $$MODEL_LOWER_NAME$s
+     *
+     * @return $MODEL_NAME$Resource
+     */
+    public function update($MODEL_NAME$Request $request, $MODEL_NAME$ $$MODEL_LOWER_NAME$): $MODEL_NAME$Resource
+    {
+        $this->authorize('update', $$MODEL_LOWER_NAME$);
+
+        $this->$MODEL_LOWER_NAME$Service->update($$MODEL_LOWER_NAME$);
+
+        return $MODEL_NAME$Resource::make($$MODEL_LOWER_NAME$->refresh());
+    }
+
+    /**
+     * Delete a $MODEL_LOWER_NAME$
+     *
+     * @param $MODEL_NAME$ $$MODEL_LOWER_NAME$
+     *
+     * @return Response
+     */
+    public function destroy($MODEL_NAME$ $$MODEL_LOWER_NAME$): Response
+    {
+        $this->authorize('delete', $$MODEL_LOWER_NAME$);
+
+        $this->$MODEL_LOWER_NAME$Service->delete($$MODEL_LOWER_NAME$);
+
+        return response()->noContent();
+    }
+}

@@ -1,0 +1,19 @@
+<?php
+
+return [
+
+    "module" => [
+        'title' => "Title example",
+        'code'  => "$LOWER_NAME$:module"
+    ],
+
+    "permissions" => [
+        "$LOWER_NAME$" => [
+            "create" => " Créer ...",
+            "update" => "Modifier ...",
+            "delete" => "Supprimer ...",
+            "list"   => "Lister ...",
+            "read"   => "Visualiser ...",
+        ],
+    ]
+];

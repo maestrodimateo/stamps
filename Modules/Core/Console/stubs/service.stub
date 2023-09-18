@@ -1,0 +1,14 @@
+<?php
+namespace $NAMESPACE$;
+
+use Illuminate\Http\Request;
+use Modules\Core\Services\AbstractService;
+use \$REPOSITORY_NAMESPACE$\$NAME$Repository;
+
+class $CLASS$ extends AbstractService
+{
+    public function __construct($NAME$Repository $$LOWER_NAME$Repository, Request $request)
+    {
+        parent::__construct($$LOWER_NAME$Repository, $request);
+    }
+}

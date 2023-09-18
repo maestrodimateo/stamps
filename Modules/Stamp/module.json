@@ -1,0 +1,13 @@
+{
+    "name": "Stamp",
+    "alias": "stamp",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\Stamp\\Providers\\StampServiceProvider"
+    ],
+    "aliases": {},
+    "files": [],
+    "requires": []
+}

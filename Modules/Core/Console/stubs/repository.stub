@@ -1,0 +1,10 @@
+<?php
+namespace $NAMESPACE$;
+
+use \$MODEL_NAMESPACE$\$NAME$;
+use Modules\Core\Repositories\AbstractRepository;
+
+class $CLASS$ extends AbstractRepository
+{
+    protected string $model = $NAME$::class;
+}

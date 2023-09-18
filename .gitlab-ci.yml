@@ -1,0 +1,51 @@
+# Includes deployment pipeline only test
+image: php:7.4
+
+#initialisation ssh echange de clés 
+.init_ssh: &init_ssh |
+    apt-get update
+    apt-get install -y  -qq  openssh-client rsync   
+    mkdir -p ~/.ssh && touch ~/.ssh/known_hosts
+    echo "${SSH_PRIVATE_KEY_PREPROD}" > "${HOME}/.ssh/id_rsa"
+    chmod 700 "${HOME}/.ssh/id_rsa"
+    cat ~/.ssh/known_hosts
+
+
+
+
+
+#Etape de build install des dependences et construction des vendors
+composer:
+  stage: build
+  cache:
+    key: ${CI_COMMIT_REF_SLUG}-composer
+    paths:
+      - vendor/
+  before_script:
+      #Installation des paquet ssh rsync composer et les extensions php
+      - apt-get update
+      - apt-get install -y  -qq git curl libmcrypt-dev libjpeg-dev libpng-dev libfreetype6-dev libbz2-dev zlib1g-dev libxpm-dev libjpeg62-turbo-dev libwebp-dev
+      - apt-get clean
+      - curl --silent --show-error "https://getcomposer.org/installer" | php -- --install-dir=/usr/local/bin --filename=composer
+
+      - apt-get install -y libzip-dev
+      - docker-php-ext-install zip
+
+      - docker-php-ext-install gd
+  script:
+      - composer install --prefer-dist --no-ansi --no-interaction --no-progress --no-scripts
+  artifacts:
+    expire_in: 1 month
+    paths:
+      - vendor/
+
+#Etape de deploiment sur les deux serveurs
+deploy_prod_pp:
+    stage: deploy
+    script:
+        - *init_ssh
+        #- ssh-keyscan -H "${SSH_PROD_KEWA1}" >> ~/.ssh/known_hosts
+        - echo "${KNOW_HOST_PREPROD}" >> ~/.ssh/known_hosts
+        - rsync -atv --progress --delete --exclude '.env' --exclude 'public/.htaccess' --exclude 'storage/' --exclude '.gitignore' --exclude 'bootstrap/cache/' * user-git@${SSH_PROD_HOST_PREPROD}:/var/www/html/pl-api/
+    only:
+        - master

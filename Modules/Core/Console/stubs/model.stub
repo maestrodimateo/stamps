@@ -1,0 +1,22 @@
+<?php
+
+namespace $NAMESPACE$;
+
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Modules\Core\Traits\Model\HasUuid;
+use Modules\Core\Traits\Model\WithSearch;
+
+class $CLASS$ extends Model
+{
+    use HasFactory, HasUuid, WithSearch;
+
+    protected $fillable = $FILLABLE$;
+
+    /**
+     * full text search attributes
+     *
+     * @var array<string>
+     */
+    protected $fullTextColumns = [];
+}

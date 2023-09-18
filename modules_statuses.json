@@ -1,0 +1,11 @@
+{
+    "Admin": true,
+    "Core": true,
+    "Logger": true,
+    "Workflow": true,
+    "Housing": true,
+    "Document": true,
+    "Case": true,
+    "Dossier": true,
+    "Stamp": true
+}

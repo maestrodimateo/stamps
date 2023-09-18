@@ -1,0 +1,63 @@
+<?php
+
+namespace $NAMESPACE$;
+
+use \$MODEL_NAMESPACE$\$NAME$;
+
+class $CLASS$
+{
+    /**
+     * Handle $LOWER_NAME$ "created" event.
+     *
+     * @param  \$MODEL_NAMESPACE$\$NAME$ $LOWER_NAME$
+     * @return void
+     */
+    public function created($NAME$ $$LOWER_NAME$)
+    {
+        //
+    }
+
+    /**
+     * Handle $LOWER_NAME$ "updated" event.
+     *
+     * @param  \$MODEL_NAMESPACE$\$NAME$ $LOWER_NAME$
+     * @return void
+     */
+    public function updated($NAME$ $$LOWER_NAME$)
+    {
+        //
+    }
+
+    /**
+     * Handle $LOWER_NAME$ "deleted" event.
+     *
+     * @param  \$MODEL_NAMESPACE$\$NAME$ $LOWER_NAME$
+     * @return void
+     */
+    public function deleted($NAME$ $$LOWER_NAME$)
+    {
+        //
+    }
+
+    /**
+     * Handle $LOWER_NAME$ "restored" event.
+     *
+     * @param  \$MODEL_NAMESPACE$\$NAME$ $LOWER_NAME$
+     * @return void
+     */
+    public function restored($NAME$ $$LOWER_NAME$)
+    {
+        //
+    }
+
+    /**
+     * Handle $LOWER_NAME$ "force deleted" event.
+     *
+     * @param  \$MODEL_NAMESPACE$\$NAME$ $LOWER_NAME$
+     * @return void
+     */
+    public function forceDeleted($NAME$ $$LOWER_NAME$)
+    {
+        //
+    }
+}
